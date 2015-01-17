@@ -1,0 +1,58 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle glyphicon glyphicon-list" data-toggle="collapse" data-target=".navbar-collapse">
+          </button>
+          <a href="#" class="navbar-brand" style="margin-top:-20px;"><h5>MPC</h5></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <% if (session.authenticated && session.User.admin) { %>
+            <li class="active"><a href="/user">User Administration</a></li>    
+            <% } %>
+          </ul>
+          <div class="navbar-right">
+            <% if (session.authenticated) { %>
+              <a class="btn btn-success navbar-btn navbar-right" href="/user/logout">Sign Out</a>
+            <% } %>
+            <% if (!session.authenticated) { %>
+              <a href="/user/login" class="btn btn-success navbar-btn navbar-right">Sign in</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="container">
+	<h3>User Administration</h3>
+	<table class='table'>
+		<tr>
+			<th>Nama</th>
+			<th>NIM</th>
+			<th>Email</th>
+			<th>Kelas</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		
+		<% _.each(users, function(user) { %>
+		<tr data-id="<%= user.id %>" data-model="user">
+			<td><%= user.nama %></td>
+			<td> <%= user.nim %> </td>
+			<td><%= user.email %></td>
+			<td><%= user.kelas %></td>	
+			<td><a href="/user/sendemail/<%= user.id %>" class="btn btn-sm btn-warning">Send Email</a></td>
+			<% if (session.User.id!=user.id) { %>
+			<td><form action="/user/destroy/<%= user.id %>" method="POST">
+				<input type="hidden" name="_method" value="delete"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+			<% } else  { %>
+				<td></td>
+			<% } %>
+		</tr> 
+
+		<% }) %>
+	</table>
+</div>

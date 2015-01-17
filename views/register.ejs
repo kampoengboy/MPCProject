@@ -1,0 +1,70 @@
+<div class = "jumbotron">
+	<h3 class="_sign">Sign Up for Free</h3>
+	<form action="/user/createAdmin" method="post" class="regsite" id="regsite">
+		<div class="control-group">
+			<input type="text" class="form-control" placeholder="your username" name="username" id="username">
+		</div>
+
+		<div class="control-group">
+			<input type="password" class="form-control" placeholder="password" name="password" id="password">
+		</div>
+		<div class="control-group">
+			<input type="password" class="form-control" placeholder="password confirmation" name="confirmation" id="confirmation">
+		</div>
+		<div class="control-group">
+			<input type="text" class="form-control" placeholder="your name" name="name" id="name">
+		</div>
+	
+		<div class="control-group">
+			<input type="text" class="form-control" placeholder="email address" name="email" id="email">
+		</div>
+	
+		<input type="submit" class= "btn btn-lg btn-primary btn-block" value="Sign Up" id="update">
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	</form>      			
+</div>
+
+<script type="text/javascript">
+$("#update").live("click",function(){
+	var a = $("#username").val();
+	if(a=='')
+	{
+		alert("Isi username anda");
+		return false;
+	}
+	var b = $("#password").val();
+	if(b=='')
+	{
+		alert("Isi password anda");
+		return false;
+	}
+	if(b.length<6)
+	{
+		alert('Password harus memiliki panjang minimal 6');
+		return false;
+	}
+	var c = $("#confirmation").val();
+	if(c=='')
+	{
+		alert("Isi password konfirmasi anda!");
+		return false;
+	}
+	if(c!=b)
+	{
+		alert("Password dengan Konfirmasi tidak cocok!");
+		return false;
+	}
+	var d = $("#name").val();
+	if(d=='')
+	{
+		alert("Isi nama anda!");
+		return false;
+	}
+	var e = $("#email").val();
+	if(e=='')
+	{
+		alert("Isi Email anda!");
+		return false;
+	}
+});
+</script>

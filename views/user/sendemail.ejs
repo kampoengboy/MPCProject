@@ -1,0 +1,12 @@
+<div class="container">
+	<h1>Send Email </h1>
+	Send to  : <span style="color:blue;"> <%=user.email%> </span>
+	<div class="control-group">
+		Keterangan<br>
+		<form action = "/user/send/<%=user.id%>" method="POST">
+			<textarea class="form-control" style="height:200px;" name="isi"></textarea>
+			<br>
+			<input type="submit" class="btn btn-success" value="Send" id="update">
+		</form>
+	</div>
+</div>

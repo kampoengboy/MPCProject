@@ -1,0 +1,64 @@
+
+<style>
+	body{
+		background-color: #E7EBF2;
+	}
+</style>
+<div class = "container">
+	<div class="jumbotron">
+		<h3 class="_sign">Form Pendaftaran MPC New Year Contest</h3>
+				<form action="/user/createPeserta" method="post" class="regsite" id="regsite">
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="Nama Anda" name="nama" id="nama">
+					</div>
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="Email Anda" name="email" id="email">
+					</div>
+
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="NIM Anda" name="nim" id="nim">
+					</div>
+
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="Kelas Anda" name="kelas" id="kelas">
+					</div>
+					<input type="submit" class= "btn btn-lg btn-primary btn-block" value="Daftar" id="update">
+					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				</form>
+				<hr>
+	</div>
+<div class="container">
+	<footer style="color:black;">
+	Copyright &copy; MPC, 2015.
+	</footer>
+</container>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script>
+
+$("#update").live("click",function(){
+	var a = $("#nama").val();
+	if(a=='')
+	{
+		alert("Isi nama anda");
+		return false;
+	}
+	var b = $("#email").val();
+	if(b=='')
+	{
+		alert("Isi email anda");
+		return false;
+	}
+	var c = $("#nim").val();
+	if(c=='')
+	{
+		alert("Isi NIM anda!");
+		return false;
+	}
+	var d = $("#kelas").val();
+	if(d=='')
+	{
+		alert("Isi kelas anda!");
+		return false;
+	}
+});
+</script>

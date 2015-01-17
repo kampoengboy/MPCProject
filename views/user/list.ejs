@@ -1,0 +1,17 @@
+<div class="container">
+	<h3>List Peserta</h3>
+	<table class='table'>
+		<tr>
+			<th>Nama</th>
+			<th>NIM</th>
+			<th>Kelas</th>
+		</tr>
+		<% _.each(users, function(user) { %>
+		<tr data-id="<%= user.id %>" data-model="user">
+			<td><%= user.nama %></td>
+			<td> <%= user.nim %> </td>
+			<td><%= user.kelas %></td>	
+		</tr> 
+		<% }) %>
+	</table>
+</div>
