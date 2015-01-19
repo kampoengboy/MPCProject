@@ -58,8 +58,8 @@ module.exports.connections = {
   ***************************************************************************/
   mongodb : {
     adapter : 'sails-mongo',
-    url : process.env.DB_URL,
-    //url : "mongodb://admin:admin@dogen.mongohq.com:10017/Devsee",
+    //url : process.env.DB_URL,
+    url : "mongodb://admin:admin@dogen.mongohq.com:10017/Devsee",
     schema : true
   }
   /***************************************************************************
