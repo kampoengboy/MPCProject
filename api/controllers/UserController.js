@@ -37,9 +37,11 @@ module.exports = {
 				emaildomain+=usrObj.email[i]
 			}
 		}
+
 		if(nimemail.length!=9 || emaildomain!="students.mikroskil.ac.id"){
 			return res.send("Maaf, email" +usrObj.email+" ini bukan email mikroskil");
 		}
+
 		User.findOne({'email':usrObj.email}, function foundUser(err,user){
 			if(user){
 				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
@@ -60,11 +62,43 @@ module.exports = {
 							if(user){
 								return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
 							}
-							User.create(usrObj, function userCreated(err,user){
-								user.save(function(err,user){
-									return res.redirect('/user/thankyou');
+							User.findOne({'nimketua':usrObj.nimanggota1}, function foundUser(err,user){
+								if(user){
+									return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+								}
+								User.findOne({'nimketua':usrObj.nimanggota2}, function foundUser(err,user){
+									if(user){
+										return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+									}
+									User.findOne({'nimanggota1':usrObj.nimketua}, function foundUser(err,user){
+										if(user){
+											return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+										}
+										User.findOne({'nimanggota1':usrObj.nimanggota2}, function foundUser(err,user){
+											if(user){
+												return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+											}
+											User.findOne({'nimanggota2':usrObj.nimketua}, function foundUser(err,user){
+												if(user){
+													return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+												}
+												User.findOne({'nimanggota2':usrObj.nimanggota1}, function foundUser(err,user){
+													if(user){
+														return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+													}
+													User.create(usrObj, function userCreated(err,user){
+														user.save(function(err,user){
+															return res.redirect('/user/thankyou');
+														});
+													});
+												});
+											});
+
+										});
+									});
 								});
 							});
+							
 						});
 					});
 				});
@@ -72,6 +106,7 @@ module.exports = {
 			
 		});	
 	},
+
 	thankyou:function(req,res,next){
 		res.view();
 	},
