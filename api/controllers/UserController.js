@@ -37,11 +37,12 @@ module.exports = {
 				emaildomain+=usrObj.email[i]
 			}
 		}
-
+		if(usrObj.nimketua==usrObj.nimanggota1 || usrObj.nimketua==usrObj.nimanggota2 || usrObj.nimanggota1==usrObj.nimanggota2){
+			return res.send("Maaf, NIM tidak boleh sama");
+		}
 		if(nimemail.length!=9 || emaildomain!="students.mikroskil.ac.id"){
 			return res.send("Maaf, email" +usrObj.email+" ini bukan email mikroskil");
 		}
-
 		User.findOne({'email':usrObj.email}, function foundUser(err,user){
 			if(user){
 				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
