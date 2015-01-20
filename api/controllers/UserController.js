@@ -6,20 +6,50 @@
  */
 var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
+var emailExistence = require('email-existence');
 module.exports = {
 	createPeserta : function(req,res,next){
 		var usrObj = {
-			nama:req.param('nama'),
+			namatim:req.param('namatim'),
+			namaketua:req.param('namaketua'),
+			nimketua:req.param('nimketua'),
+			namaanggota1:req.param('namaanggota1'),
+			nimanggota1:req.param('nimanggota1'),
+			namaanggota2:req.param('namaanggota2'),
+			nimanggota2:req.param('nimanggota2'),
 			email : req.param('email'),
-			nim : req.param('nim'),
-			kelas : req.param('kelas'),
+			notelp: req.param('notelp'),
 			admin : false
 		}
-		User.create(usrObj, function userCreated(err,user){
-			user.save(function(err,user){
-				return res.redirect('/user/thankyou');
+		var nimemail="";
+		var emaildomain ="";
+		var left = true;
+		for(var i=0;i<usrObj.email.length;i++)
+		{
+			if(usrObj.email[i]=='@')
+			{
+				left=false;
+				continue;
+			}
+			if(left){
+				nimemail+=usrObj.email[i];
+			} else {
+				emaildomain+=usrObj.email[i]
+			}
+		}
+		if(nimemail.length!=9 || emaildomain!="students.mikroskil.ac.id"){
+			return res.send("Maaf, email" +usrObj.email+" ini bukan email mikroskil");
+		}
+		User.findOne({'email':usrObj.email}, function foundUser(err,user){
+			if(user){
+				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
+			}
+			User.create(usrObj, function userCreated(err,user){
+				user.save(function(err,user){
+					return res.redirect('/user/thankyou');
+				});
 			});
-		});
+		});	
 	},
 	thankyou:function(req,res,next){
 		res.view();

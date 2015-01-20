@@ -9,18 +9,31 @@
 		<h3 class="_sign">Form Pendaftaran MPC New Year Contest</h3>
 				<form action="/user/createPeserta" method="post" class="regsite" id="regsite">
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nama Anda" name="nama" id="nama">
+						<input type="text" class="form-control" placeholder="Nama Tim Anda" name="namatim" id="namatim">
 					</div>
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Email Anda" name="email" id="email">
+						<input type="text" class="form-control" placeholder="Nama Ketua" name="namaketua" id="namaketua">
 					</div>
-
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="NIM Anda" name="nim" id="nim">
+						<input type="text" class="form-control" placeholder="NIM Ketua" name="nimketua" id="nimketua">
 					</div>
-
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Kelas Anda" name="kelas" id="kelas">
+						<input type="text" class="form-control" placeholder="Nama Anggota 1" name="namaanggota1" id="namaanggota1">
+					</div>
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="NIM Anggota 1" name="nimanggota1" id="nimanggota2">
+					</div>
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="Nama Anggota 2" name="namaanggota2" id="namaanggota2">
+					</div>
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="NIM Anggota 2" name="nimanggota2" id="nim">
+					</div>
+					<div class="control-group">
+						<input type="email" class="form-control" placeholder="Email yang bisa dihubungi" name="email" id="email">
+					</div>
+					<div class="control-group">
+						<input type="text" class="form-control" placeholder="Nomor telepon yang bisa dihubungi" name="notelp" id="notelp">
 					</div>
 					<input type="submit" class= "btn btn-lg btn-primary btn-block" value="Daftar" id="update">
 					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
@@ -36,29 +49,104 @@
 <script>
 
 $("#update").live("click",function(){
-	var a = $("#nama").val();
+	var a = $("#namatim").val();
 	if(a=='')
 	{
-		alert("Isi nama anda");
+		alert("Isi nama tim anda");
 		return false;
 	}
-	var b = $("#email").val();
+	var b = $("#namaketua").val();
 	if(b=='')
 	{
-		alert("Isi email anda");
+		alert("Isi nama ketua anda");
 		return false;
 	}
-	var c = $("#nim").val();
+	var c = $("#nimketua").val();
 	if(c=='')
 	{
-		alert("Isi NIM anda!");
+		alert("Isi NIM ketua anda!");
 		return false;
 	}
-	var d = $("#kelas").val();
+	if(c.length!=9)
+	{
+		alert("NIM Mikroskil berjumlah 9");
+		return false;
+	}
+	for(var i=0;i<c.length;i++)
+	{
+		if(c[i]<'0' || c[i]>'9')
+		{
+			alert("Bukan NIM Mikroskil");
+			return false;
+		}
+	}
+	var d = $("#namaanggota1").val();
 	if(d=='')
 	{
-		alert("Isi kelas anda!");
+		alert("Isi nama anggota 1 anda");
 		return false;
 	}
+	var e = $("#nimanggota1").val();
+	if(e=='')
+	{
+		alert("Isi NIM anggota 1 anda!");
+		return false;
+	}
+	for(var i=0;i<e.length;i++)
+	{
+		if(e[i]<'0' || e[i]>'9')
+		{
+			alert("Bukan NIM Mikroskil");
+			return false;
+		}
+	}
+	if(e.length!=9)
+	{
+		alert("NIM Mikroskil berjumlah 9");
+		return false;
+	}
+	var f = $("#namaanggota2").val();
+	if(f=='')
+	{
+		alert("Isi nama anggota 2 anda");
+		return false;
+	}
+	var g = $("#nimanggota2").val();
+	if(g=='')
+	{
+		alert("Isi NIM anggota 2 anda!");
+		return false;
+	}
+	if(g.length!=9)
+	{
+		alert("NIM Mikroskil berjumlah 9");
+		return false;
+	}
+	for(var i=0;i<g.length;i++)
+	{
+		if(g[i]<'0' || g[i]>'9')
+		{
+			alert("Bukan NIM Mikroskil");
+			return false;
+		}
+	}
+	var h = $("#email").val();
+	if(h=='')
+	{
+		alert("Isi email yang bisa dihubungi");
+		return false;
+	}
+	var i = $("#notelp").val();
+	if(i=='')
+	{
+		alert("Isi no.telp yang bisa dihubungi");
+		return false;
+	}
+	if(c==e || c==g || e==g)
+	{
+		alert("NIM yang diisi haruslah beda");
+		return false;
+	}
+
 });
 </script>

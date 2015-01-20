@@ -26,10 +26,15 @@
 	<h3>User Administration</h3>
 	<table class='table'>
 		<tr>
-			<th>Nama</th>
-			<th>NIM</th>
+			<th>Nama Tim</th>
+			<th>Nama Ketua</th>
+			<th>NIM Ketua</th>
+			<th>Nama Anggota 1</th>
+			<th>NIM Anggota 1</th>
+			<th>Nama Anggota 2</th>
+			<th>NIM Anggota 2</th>
 			<th>Email</th>
-			<th>Kelas</th>
+			<th>Telp</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -37,10 +42,15 @@
 		
 		<% _.each(users, function(user) { %>
 		<tr data-id="<%= user.id %>" data-model="user">
-			<td><%= user.nama %></td>
-			<td> <%= user.nim %> </td>
+			<td><%= user.namatim %></td>
+			<td> <%= user.namaketua %> </td>
+			<td> <%= user.nimketua %> </td>
+			<td><%= user.namaanggota1 %></td>
+			<td> <%= user.nimanggota1 %> </td>
+			<td><%= user.namaanggota2 %></td>
+			<td> <%= user.nimanggota2 %> </td>
 			<td><%= user.email %></td>
-			<td><%= user.kelas %></td>	
+			<td><%= user.notelp %></td>	
 			<td><a href="/user/sendemail/<%= user.id %>" class="btn btn-sm btn-warning">Send Email</a></td>
 			<% if (session.User.id!=user.id) { %>
 			<td><form action="/user/destroy/<%= user.id %>" method="POST">
