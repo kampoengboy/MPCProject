@@ -44,11 +44,32 @@ module.exports = {
 			if(user){
 				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
 			}
-			User.create(usrObj, function userCreated(err,user){
-				user.save(function(err,user){
-					return res.redirect('/user/thankyou');
+			User.findOne({'namatim':usrObj.namatim}, function foundUser(err,user){
+				if(user) {
+					return res.send('Nama Tim '+user.namatim+' ini sudah terdaftar'); 
+				}
+				User.findOne({'nimketua':usrObj.nimketua}, function foundUser(err,user){
+					if(user){
+						return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+					}
+					User.findOne({'nimanggota1':usrObj.nimanggota1}, function foundUser(err,user){
+						if(user){
+							return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+						}
+						User.findOne({'nimanggota2':usrObj.nimanggota2}, function foundUser(err,user){
+							if(user){
+								return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+							}
+							User.create(usrObj, function userCreated(err,user){
+								user.save(function(err,user){
+									return res.redirect('/user/thankyou');
+								});
+							});
+						});
+					});
 				});
 			});
+			
 		});	
 	},
 	thankyou:function(req,res,next){
