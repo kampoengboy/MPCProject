@@ -4,7 +4,12 @@
 		background-color: #E7EBF2;
 	}
 </style>
-<div class = "container">
+<div class="container">
+<img class="img img-responsive" src="/images/mpc.jpg" />
+</div>
+<div class = "container" id="content">
+</div>
+<div class = "container" id="daftar">
 	<div class="jumbotron">
 		<h3 class="_sign">Form Pendaftaran MPC New Year Contest</h3>
 				<form action="/user/createPeserta" method="post" class="regsite" id="regsite">
@@ -45,6 +50,70 @@
 	Copyright &copy; MPC, 2015.
 	</footer>
 </container>
+<script type="text/jsx">
+ 	      var target_date = new Date("Jan 30, 2015").getTime();
+	      var days =  0 
+	      	hours = 0, 
+	      	minutes = 0, 
+	      	seconds = 0;
+	      var Box = React.createClass({
+	      	getInitialState : function(){
+	      		return {days:0, hours:0, minutes:0, seconds:0};
+	      	},
+	      	submitTimer: function(d,h,m,s){
+	      		this.setState({days:d, hours:h, minutes:m, seconds:s});
+	      	},
+	      	render: function(){
+	      		return(
+	      			<div className="box">
+	      				<Timer days={this.state.days} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} date={this.props.date} onState={this.submitTimer}/>	
+	      			</div>
+	      		);
+	      	}
+	      });
+	     var Timer = React.createClass({
+	     	tick:function(){
+	     		var current_date = new Date().getTime();
+			var seconds_left = (this.props.date - current_date) / 1000;
+			var days, hours, minutes, seconds;
+			days = parseInt(seconds_left / 86400);
+			seconds_left = seconds_left % 86400;
+			hours = parseInt(seconds_left / 3600);
+			seconds_left = seconds_left % 3600;
+			minutes = parseInt(seconds_left / 60);
+			seconds = parseInt(seconds_left % 60);
+			if(days<=0 && hours<=0 && minutes<=0 && seconds<=0)
+			{
+				days = 0,
+				hours = 0,
+				minutes =0,
+				seconds = 0;
+				var x = document.querySelector('.timer');
+				x.innerHTML = "<h2>DeadLine ditutup!!!</h2>"
+				var y = document.querySelector('#daftar');
+				y.innerHTML="";
+			}
+			this.props.onState(days, hours, minutes, seconds);
+	     	},
+	     	componentDidMount : function(){
+	     		this.tick();
+	     		setInterval(this.tick, 1000);
+	     	},
+	     	render: function() {
+	     		return (
+	     			<div className="timer jumbotron">
+	     				<h4>
+	     				{this.props.days} hari {this.props.hours} jam {this.props.minutes} menit {this.props.seconds} detik menuju Penutupan Pendaftaran
+	     				</h4>
+	     			</div>
+	     		);
+	     	}
+	     });
+	     React.render(
+	      	<Box date={target_date} days={days} hours={hours} minutes={minutes} seconds={seconds} />,
+	      	document.getElementById('content')
+	      );
+</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script>
 
