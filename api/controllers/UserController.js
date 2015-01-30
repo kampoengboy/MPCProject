@@ -166,12 +166,12 @@ module.exports = {
 			var transporter = nodemailer.createTransport({
 		              service:'Gmail',
 		              auth:{
-		                user:'mikroskilprogrammingclub@gmail.com',
-		                pass:'120512@mpc'
+		                user:'mike.visualsoft@gmail.com',
+		                pass:'michaellim493133'
 		              }
 		        	});
 			 var MailOptions = {
-		                from:'MPC<mikroskilprogrammingclub@gmail.com>',
+		                from:'Michael Lim<mike.visualsoft@gmail.com>',
 		                to : user.email,
 		                subject : 'MPC',
 		                html : req.param('isi')
