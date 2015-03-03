@@ -34,7 +34,8 @@ module.exports.policies = {
     'index' : 'admin',
     'sendemail' : 'admin',
     'send' : 'admin',
-    'destroy' : 'admin'
+    'destroy' : 'admin',
+    'deleteall' : 'admin'
   },
 
   /***************************************************************************

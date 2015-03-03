@@ -5,40 +5,39 @@
 	}
 </style>
 <div class="container">
-<img class="img img-responsive" src="/images/mpc.jpg" />
+	<h3>MPC BaseCamp & Hackathon</h3>
+	<p>Deskripsi : </p>
+	<p style="text-align:justify">Event BaseCamp adalah event yang diselenggarakan MPC untuk para anggota MPC yang mau belajar tentang cara membuat Web Application. Di event ini kami akan mengajarkan anda berbagai hal yang diperlukan untuk membuat suatu Aplikasi Web yang nantinya akan kalian implementasikan di perlombaan Hackathon <br> <br>Event Hackathon adalah event yang diselenggarakan MPC untuk para anggota MPC yang sudah mengikuti BaseCamp untuk memperlombakan Web Application terbagus menurut kami yang akan memenangi event ini. Di dalam Event ini, kalian harus membentuk 1 tim yang terdiri dari maksimum 4 orang dan setiap tim membuat Web Application masing-masing dalam waktu 1 hari secara non-stop.</p>
+	<b> Jadwal & Tanggal Pelaksanaan : </b>
+	<p> Waktu : <br> BaseCamp : 11-14 Maret 2015 <br> Hackathon : 15 Maret 2015 </p>
+	<p> Lokasi : <b>Kami akan memberitahukan secepatnya. Dan pastinya akan berada di lingkungan Mikroskil</b></p>
+	<b> Syarat : </b>
+	<ul>
+		<li>Merupakan mahasiswa Mikroskil</li>
+		<li>Setidaknya sudah mengetahui alur HTML, CSS, JavaScript</li>
+	</ul>
 </div>
-<div class = "container" id="content">
+<div class="container" style="text-align:center">
+	<b>Hitung Mundur menuju penutupan pendaftaran </b>
 </div>
+<br><br>
+<div class="clock"></div>
+<br><br>
 <div class = "container" id="daftar">
-	<div class="jumbotron">
-		<h3 class="_sign">Form Pendaftaran MPC New Year Contest</h3>
+	<div class="jumbotron" id="info">
+		<h3 class="_sign">Form Pendaftaran BaseCamp & Hackathon Event</h3>
 				<form action="/user/createPeserta" method="post" class="regsite" id="regsite">
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nama Tim Anda" name="namatim" id="namatim">
+						<input type="text" class="form-control" placeholder="Nama Anda" name="nama" id="nama" value="">
 					</div>
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nama Ketua" name="namaketua" id="namaketua">
+						<input type="text" class="form-control" placeholder="NIM Anda" name="nim" id="nim" value="">
 					</div>
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="NIM Ketua" name="nimketua" id="nimketua">
+						<input type="email" class="form-control" placeholder="Email yang bisa dihubungi (Harus Email Mikroskil)" name="email" id="email" value="">
 					</div>
 					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nama Anggota 1" name="namaanggota1" id="namaanggota1">
-					</div>
-					<div class="control-group">
-						<input type="text" class="form-control" placeholder="NIM Anggota 1" name="nimanggota1" id="nimanggota1">
-					</div>
-					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nama Anggota 2" name="namaanggota2" id="namaanggota2">
-					</div>
-					<div class="control-group">
-						<input type="text" class="form-control" placeholder="NIM Anggota 2" name="nimanggota2" id="nim">
-					</div>
-					<div class="control-group">
-						<input type="email" class="form-control" placeholder="Email yang bisa dihubungi (Harus Email Mikroskil)" name="email" id="email">
-					</div>
-					<div class="control-group">
-						<input type="text" class="form-control" placeholder="Nomor telepon yang bisa dihubungi" name="notelp" id="notelp">
+						<input type="text" class="form-control" placeholder="Nomor telepon yang bisa dihubungi" name="notelp" id="notelp" value="">
 					</div>
 					<input type="submit" class= "btn btn-lg btn-primary btn-block" value="Daftar" id="update">
 					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
@@ -49,174 +48,4 @@
 	<footer style="color:black;">
 	Copyright &copy; MPC, 2015.
 	</footer>
-</container>
-<script type="text/jsx">
-	      var target_date= new Date(2015, 0, 31, 22, 0, 0, 0).getTime();
- 	      //var target_date = new Date("Jan 30, 2015").getTime();
-	      var days =  0 
-	      	hours = 0, 
-	      	minutes = 0, 
-	      	seconds = 0;
-	      var Box = React.createClass({
-	      	getInitialState : function(){
-	      		return {days:0, hours:0, minutes:0, seconds:0};
-	      	},
-	      	submitTimer: function(d,h,m,s){
-	      		this.setState({days:d, hours:h, minutes:m, seconds:s});
-	      	},
-	      	render: function(){
-	      		return(
-	      			<div className="box">
-	      				<Timer days={this.state.days} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} date={this.props.date} onState={this.submitTimer}/>	
-	      			</div>
-	      		);
-	      	}
-	      });
-	     var Timer = React.createClass({
-	     	tick:function(){
-	     		var current_date = new Date().getTime();
-			var seconds_left = (this.props.date - current_date) / 1000;
-			var days, hours, minutes, seconds;
-			days = parseInt(seconds_left / 86400);
-			seconds_left = seconds_left % 86400;
-			hours = parseInt(seconds_left / 3600);
-			seconds_left = seconds_left % 3600;
-			minutes = parseInt(seconds_left / 60);
-			seconds = parseInt(seconds_left % 60);
-			if(days<=0 && hours<=0 && minutes<=0 && seconds<=0)
-			{
-				days = 0,
-				hours = 0,
-				minutes =0,
-				seconds = 0;
-				var x = document.querySelector('.timer');
-				x.innerHTML = "<h2>Pendaftaran Ditutup!!!!!</h2>"
-				var y = document.querySelector('#daftar');
-				y.innerHTML="";
-			}
-			this.props.onState(days, hours, minutes, seconds);
-	     	},
-	     	componentDidMount : function(){
-	     		this.tick();
-	     		setInterval(this.tick, 1000);
-	     	},
-	     	render: function() {
-	     		return (
-	     			<div className="timer jumbotron">
-	     				<h4>
-	     				{this.props.days} hari {this.props.hours} jam {this.props.minutes} menit {this.props.seconds} detik menuju Penutupan Pendaftaran
-	     				</h4>
-	     			</div>
-	     		);
-	     	}
-	     });
-	     React.render(
-	      	<Box date={target_date} days={days} hours={hours} minutes={minutes} seconds={seconds} />,
-	      	document.getElementById('content')
-	      );
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script>
-
-$("#update").live("click",function(){
-	var a = $("#namatim").val();
-	if(a=='')
-	{
-		alert("Isi nama tim anda");
-		return false;
-	}
-	var b = $("#namaketua").val();
-	if(b=='')
-	{
-		alert("Isi nama ketua anda");
-		return false;
-	}
-	var c = $("#nimketua").val();
-	if(c=='')
-	{
-		alert("Isi NIM ketua anda!");
-		return false;
-	}
-	if(c.length!=9)
-	{
-		alert("NIM Mikroskil berjumlah 9");
-		return false;
-	}
-	for(var i=0;i<c.length;i++)
-	{
-		if(c[i]<'0' || c[i]>'9')
-		{
-			alert("Bukan NIM Mikroskil");
-			return false;
-		}
-	}
-	var d = $("#namaanggota1").val();
-	if(d=='')
-	{
-		alert("Isi nama anggota 1 anda");
-		return false;
-	}
-	var e = $("#nimanggota1").val();
-	if(e=='')
-	{
-		alert("Isi NIM anggota 1 anda!");
-		return false;
-	}
-	for(var i=0;i<e.length;i++)
-	{
-		if(e[i]<'0' || e[i]>'9')
-		{
-			alert("Bukan NIM Mikroskil");
-			return false;
-		}
-	}
-	if(e.length!=9)
-	{
-		alert("NIM Mikroskil berjumlah 9");
-		return false;
-	}
-	var f = $("#namaanggota2").val();
-	if(f=='')
-	{
-		alert("Isi nama anggota 2 anda");
-		return false;
-	}
-	var g = $("#nimanggota2").val();
-	if(g=='')
-	{
-		alert("Isi NIM anggota 2 anda!");
-		return false;
-	}
-	if(g.length!=9)
-	{
-		alert("NIM Mikroskil berjumlah 9");
-		return false;
-	}
-	for(var i=0;i<g.length;i++)
-	{
-		if(g[i]<'0' || g[i]>'9')
-		{
-			alert("Bukan NIM Mikroskil");
-			return false;
-		}
-	}
-	var h = $("#email").val();
-	if(h=='')
-	{
-		alert("Isi email yang bisa dihubungi");
-		return false;
-	}
-	var i = $("#notelp").val();
-	if(i=='')
-	{
-		alert("Isi no.telp yang bisa dihubungi");
-		return false;
-	}
-	if(c==e || c==g || e==g)
-	{
-		alert("NIM yang diisi haruslah beda");
-		return false;
-	}
-
-});
-</script>
+</div>

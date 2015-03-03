@@ -2,17 +2,13 @@
 	<h3>List Peserta</h3>
 	<table class='table'>
 		<tr>
-			<th>Nama Tim</th>
-			<th>Nama Ketua</th>
-			<th>Nama Anggota 1</th>
-			<th>Nama Anggota 2</th>
+			<th>Nama</th>
+			<th>NIM</th>
 		</tr>
 		<% _.each(users, function(user) { %>
 		<tr data-id="<%= user.id %>" data-model="user">
-			<td><%= user.namatim %></td>
-			<td> <%= user.namaketua %> </td>
-			<td><%= user.namaanggota1 %></td>
-			<td><%= user.namaanggota2 %></td>		
+			<td><%= user.nama %></td>
+			<td> <%= user.nim %> </td>		
 		</tr> 
 		<% }) %>
 	</table>

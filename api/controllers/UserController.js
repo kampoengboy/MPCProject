@@ -9,7 +9,7 @@ var bcrypt = require('bcrypt');
 var emailExistence = require('email-existence');
 module.exports = {
 	createPeserta : function(req,res,next){
-		var usrObj = {
+		/*var usrObj = {
 			namatim:req.param('namatim'),
 			namaketua:req.param('namaketua'),
 			nimketua:req.param('nimketua'),
@@ -20,6 +20,13 @@ module.exports = {
 			email : req.param('email'),
 			notelp: req.param('notelp'),
 			admin : false
+		}*/
+		var usrObj = {
+			nama:req.param('nama'),
+			nim : req.param('nim'),
+			email:req.param('email'),
+			notelp:req.param('notelp'),
+			admin:false
 		}
 		var nimemail="";
 		var emaildomain ="";
@@ -37,13 +44,23 @@ module.exports = {
 				emaildomain+=usrObj.email[i]
 			}
 		}
-		if(usrObj.nimketua==usrObj.nimanggota1 || usrObj.nimketua==usrObj.nimanggota2 || usrObj.nimanggota1==usrObj.nimanggota2){
+		/*if(usrObj.nimketua==usrObj.nimanggota1 || usrObj.nimketua==usrObj.nimanggota2 || usrObj.nimanggota1==usrObj.nimanggota2){
 			return res.send("Maaf, NIM tidak boleh sama");
-		}
+		}*/
 		if(nimemail.length!=9 || emaildomain!="students.mikroskil.ac.id"){
 			return res.send("Maaf, email" +usrObj.email+" ini bukan email mikroskil");
 		}
-		User.findOne({'email':usrObj.email}, function foundUser(err,user){
+		User.findOne({'email':usrObj.email},function(err,user){
+			if(user) {
+				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
+			}
+			if(err) return next(err);
+			User.create(usrObj, function userCreated(err,user){
+				if(err) return next(err);
+				return res.redirect('/user/thankyou');
+			});
+		});
+		/*User.findOne({'email':usrObj.email}, function foundUser(err,user){
 			if(user){
 				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
 			}
@@ -105,7 +122,7 @@ module.exports = {
 				});
 			});
 			
-		});	
+		});*/	
 	},
 
 	thankyou:function(req,res,next){
@@ -207,6 +224,11 @@ module.exports = {
 			res.view({
 				users : users
 			});
+		});
+	},
+	deleteall : function(req,res,next){
+		User.destroy({'admin':false}, function(err,user){
+			return res.redirect('/user');
 		});
 	},
 	destroy : function(req,res,next){

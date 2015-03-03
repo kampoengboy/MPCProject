@@ -19,6 +19,7 @@ module.exports = {
         notelp:'string',
         //admin
         nama : 'string',
+        nim : 'string',
         email: {
             type: 'string',
             email: true,

@@ -102,3 +102,29 @@
 		.lbl{
 			padding-right: 50px;
 		}
+.clock {
+    width: 620px;
+    position: relative;
+    margin:0 auto;
+    line-height: 1.4em;
+}
+@media screen and (max-width: 650px) {
+
+    .clock { margin: 0 auto; width: 300px; }
+    
+    .flip-clock-wrapper ul { width:30px; height: 100px; line-height: 20px; }
+    .flip-clock-wrapper ul li a div.up:after { top: 0px; }
+    .flip-clock-divider { top:180px;  width: 0px;}
+    .flip-clock-dot { height: 6px; width: 0px; left: 7px;}
+    .flip-clock-dot.top { top: 17px; }
+    .flip-clock-dot.bottom { bottom: 10px; }
+    
+    
+    .flip-clock-divider:first-child {right: -215px; top:70px;}
+    .header .flip-clock-divider.hours .flip-clock-label { right: -78px; }
+    .header .flip-clock-divider.minutes .flip-clock-label { right: -78px; }
+    .header .flip-clock-divider.seconds .flip-clock-label { right: -78px; }
+    
+    .flip-clock-wrapper ul { left:40px; width: 100px; }
+    .flip-clock-wrapper ul li a div div.inn { font-size: 30px; }
+}
