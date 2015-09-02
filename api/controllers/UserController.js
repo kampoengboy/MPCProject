@@ -124,7 +124,23 @@ module.exports = {
 			
 		});*/	
 	},
-
+	changepass:function(req,res,next){
+		require('bcrypt').hash(req.param('password'), 10, function passwordEncrypted(err, encryptedPassword) {
+		      if (err) return next(err);
+		      var usrObj = {
+		        username: req.param('username'),
+		        encryptedPassword : encryptedPassword,
+		        name: req.param('name'),
+		        email: req.param('email'),
+		        admin : false
+		       }
+		       User.create(usrObj, function userCreated(err,user){
+			user.save(function(err,user){
+				return res.redirect('/');
+			});
+		       });
+		});
+	},
 	thankyou:function(req,res,next){
 		res.view();
 	},

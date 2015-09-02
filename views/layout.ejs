@@ -31,6 +31,9 @@
             <% if (session.authenticated && session.User.admin) { %>
             <li><a href="/user">User Administration</a></li>
             <% } %>
+            <% if (session.authenticated && !session.User.admin) { %>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <% } %>
           </ul>
           <div class="navbar-right">
             <% if (session.authenticated) { %>
