@@ -8,7 +8,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <% if (session.authenticated && session.User.admin) { %>
-            <li class="active"><a href="/user">User Administration</a></li>    
+            <li class="active"><a href="/user">User Administration</a></li>
             <% } %>
           </ul>
           <div class="navbar-right">
@@ -28,19 +28,15 @@
 		<tr>
 			<th>Nama</th>
 			<th>NIM</th>
-			<th>Email</th>
-			<th>Telp</th>
 			<th></th>
 			<th></th>
 			<th></th>
 		</tr>
-		
+
 		<% _.each(users, function(user) { %>
 		<tr data-id="<%= user.id %>" data-model="user">
 			<td><%= user.nama %></td>
 			<td><%= user.nim %></td>
-			<td><%= user.email %></td>
-			<td><%= user.notelp %></td>	
 			<td><a href="/user/sendemail/<%= user.id %>" class="btn btn-sm btn-warning">Send Email</a></td>
 			<% if (session.User.id!=user.id) { %>
 			<td><form action="/user/destroy/<%= user.id %>" method="POST">
@@ -51,7 +47,7 @@
 			<% } else  { %>
 				<td></td>
 			<% } %>
-		</tr> 
+		</tr>
 
 		<% }) %>
 	</table>

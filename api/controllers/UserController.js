@@ -24,34 +24,33 @@ module.exports = {
 		var usrObj = {
 			nama:req.param('nama'),
 			nim : req.param('nim'),
-			email:req.param('email'),
 			admin:false
 		}
-		var nimemail="";
-		var emaildomain ="";
-		var left = true;
-		for(var i=0;i<usrObj.email.length;i++)
-		{
-			if(usrObj.email[i]=='@')
-			{
-				left=false;
-				continue;
-			}
-			if(left){
-				nimemail+=usrObj.email[i];
-			} else {
-				emaildomain+=usrObj.email[i]
-			}
-		}
+		var nimemail=usrObj.nim;
+		// var emaildomain ="";
+		// var left = true;
+		// for(var i=0;i<usrObj.email.length;i++)
+		// {
+		// 	if(usrObj.email[i]=='@')
+		// 	{
+		// 		left=false;
+		// 		continue;
+		// 	}
+		// 	if(left){
+		// 		nimemail+=usrObj.email[i];
+		// 	} else {
+		// 		emaildomain+=usrObj.email[i]
+		// 	}
+		// }
 		/*if(usrObj.nimketua==usrObj.nimanggota1 || usrObj.nimketua==usrObj.nimanggota2 || usrObj.nimanggota1==usrObj.nimanggota2){
 			return res.send("Maaf, NIM tidak boleh sama");
 		}*/
-		if(nimemail.length!=9 || emaildomain!="students.mikroskil.ac.id"){
-			return res.send("Maaf, email" +usrObj.email+" ini bukan email mikroskil");
+		if(nimemail.length!=9){
+			return res.send("Maaf, nim" +usrObj.nim+" ini bukan nim mikroskil");
 		}
-		User.findOne({'email':usrObj.email},function(err,user){
+		User.findOne({'nim':usrObj.nim},function(err,user){
 			if(user) {
-				return res.send("Maaf, email "+user.email+" ini sudah terdaftar");
+				return res.send("Maaf, nim "+user.nim+" ini sudah terdaftar");
 			}
 			if(err) return next(err);
 			User.create(usrObj, function userCreated(err,user){
