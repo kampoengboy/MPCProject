@@ -33,6 +33,9 @@
     "start": "node app.js",
     "debug": "node debug app.js"
   },
+  "engines": {
+    "node": "4.2.2"
+  },
   "main": "app.js",
   "repository": {
     "type": "git",
