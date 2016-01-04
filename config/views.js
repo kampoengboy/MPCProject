@@ -10,7 +10,16 @@
  * For more information on views and layouts, check out:
  * http://sailsjs.org/#/documentation/concepts/Views
  */
-
+ var minify = require('html-minifier').minify;
+ var ejs = require('ejs-locals');
+ var parsing = function(path,options,fn) {
+     options.locals = options.locals || {};
+     options.locals._layoutFile = '/layout.ejs';
+     ejs(path, options, function(err, str){
+       str = minify(str,{collapseWhitespace: true, removeComments: true});
+       return fn(err, str);
+     });
+};
 module.exports.views = {
 
   /****************************************************************************
@@ -29,9 +38,12 @@ module.exports.views = {
   * https://github.com/balderdashy/sails-wiki/blob/0.9/config.views.md#engine *
   *                                                                           *
   ****************************************************************************/
+  engine: {
+    ext: 'ejs',
+    fn: parsing
+  },
+  layout: false,
 
-  engine: 'ejs',
-  
 
   /****************************************************************************
   *                                                                           *
@@ -57,14 +69,12 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  layout: 'layout'
-
   /****************************************************************************
   *                                                                           *
-  * Using Multiple Layouts with EJS                                           *
+  * Using Multiple Layouts                                                    *
   *                                                                           *
-  * If you're using the default engine, `ejs`, Sails supports the use of      *
-  * multiple `layout` files. To take advantage of this, before rendering a    *
+  * If you're using the default `ejs` or `handlebars` Sails supports the use  *
+  * of multiple `layout` files. To take advantage of this, before rendering a *
   * view, override the `layout` local in your controller by setting           *
   * `res.locals.layout`. (this is handy if you parts of your app's UI look    *
   * completely different from each other)                                     *
@@ -77,5 +87,21 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  
+  //layout: 'layout',
+
+  /****************************************************************************
+  *                                                                           *
+  * Partials are simply top-level snippets you can leverage to reuse template *
+  * for your server-side views. If you're using handlebars, you can take      *
+  * advantage of Sails' built-in `partials` support.                          *
+  *                                                                           *
+  * If `false` or empty partials will be located in the same folder as views. *
+  * Otherwise, if a string is specified, it will be interpreted as the        *
+  * relative path to your partial files from `views/` folder.                 *
+  *                                                                           *
+  ****************************************************************************/
+
+  partials: false
+
+
 };
