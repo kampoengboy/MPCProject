@@ -1089,7 +1089,7 @@ var clock;
         // Grab the current date
         var currentDate = new Date();
 
-        var futureDate  = new Date(currentDate.getFullYear(), 2, 11);
+        var futureDate  = new Date(currentDate.getFullYear(), 0, 10);
 
         // Calculate the difference in seconds between the future and current date
         var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
@@ -1106,6 +1106,7 @@ var clock;
           countdown: true
         });
       });
+
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.

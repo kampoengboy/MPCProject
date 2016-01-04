@@ -5,8 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var nodemailer = require('nodemailer');
-var bcrypt = require('bcrypt');
 var emailExistence = require('email-existence');
+var bcrypt = require('bcrypt');
 module.exports = {
 	createPeserta : function(req,res,next){
 		/*var usrObj = {
@@ -25,7 +25,6 @@ module.exports = {
 			nama:req.param('nama'),
 			nim : req.param('nim'),
 			email:req.param('email'),
-			notelp:req.param('notelp'),
 			admin:false
 		}
 		var nimemail="";
@@ -66,43 +65,43 @@ module.exports = {
 			}
 			User.findOne({'namatim':usrObj.namatim}, function foundUser(err,user){
 				if(user) {
-					return res.send('Nama Tim '+user.namatim+' ini sudah terdaftar'); 
+					return res.send('Nama Tim '+user.namatim+' ini sudah terdaftar');
 				}
 				User.findOne({'nimketua':usrObj.nimketua}, function foundUser(err,user){
 					if(user){
-						return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+						return res.send('NIM '+user.nimketua+' ini sudah terdaftar');
 					}
 					User.findOne({'nimanggota1':usrObj.nimanggota1}, function foundUser(err,user){
 						if(user){
-							return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+							return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar');
 						}
 						User.findOne({'nimanggota2':usrObj.nimanggota2}, function foundUser(err,user){
 							if(user){
-								return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+								return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar');
 							}
 							User.findOne({'nimketua':usrObj.nimanggota1}, function foundUser(err,user){
 								if(user){
-									return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+									return res.send('NIM '+user.nimketua+' ini sudah terdaftar');
 								}
 								User.findOne({'nimketua':usrObj.nimanggota2}, function foundUser(err,user){
 									if(user){
-										return res.send('NIM '+user.nimketua+' ini sudah terdaftar'); 
+										return res.send('NIM '+user.nimketua+' ini sudah terdaftar');
 									}
 									User.findOne({'nimanggota1':usrObj.nimketua}, function foundUser(err,user){
 										if(user){
-											return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+											return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar');
 										}
 										User.findOne({'nimanggota1':usrObj.nimanggota2}, function foundUser(err,user){
 											if(user){
-												return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar'); 
+												return res.send('NIM '+user.nimanggota1+' ini sudah terdaftar');
 											}
 											User.findOne({'nimanggota2':usrObj.nimketua}, function foundUser(err,user){
 												if(user){
-													return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+													return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar');
 												}
 												User.findOne({'nimanggota2':usrObj.nimanggota1}, function foundUser(err,user){
 													if(user){
-														return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar'); 
+														return res.send('NIM '+user.nimanggota2+' ini sudah terdaftar');
 													}
 													User.create(usrObj, function userCreated(err,user){
 														user.save(function(err,user){
@@ -116,13 +115,13 @@ module.exports = {
 									});
 								});
 							});
-							
+
 						});
 					});
 				});
 			});
-			
-		});*/	
+
+		});*/
 	},
 	changepass:function(req,res,next){
 		require('bcrypt').hash(req.param('password'), 10, function passwordEncrypted(err, encryptedPassword) {
@@ -135,9 +134,7 @@ module.exports = {
 		        admin : false
 		       }
 		       User.create(usrObj, function userCreated(err,user){
-			user.save(function(err,user){
-				return res.redirect('/');
-			});
+						 	return res.redirect('/');
 		       });
 		});
 	},
@@ -155,9 +152,8 @@ module.exports = {
 		        admin : true
 		       }
 		       User.create(usrObj, function userCreated(err,user){
-			user.save(function(err,user){
-				return res.redirect('/');
-			});
+						 	if(err) console.log(err);
+						 	return res.redirect('/');
 		       });
 		});
 	},
@@ -166,7 +162,7 @@ module.exports = {
 			if (err) return next(err);
 			if(!user) {
 				return res.redirect('/user/login');
-			}	
+			}
 			// Compare password from the form params to the encrypted password of the user found.
 			bcrypt.compare(req.param('password'), user.encryptedPassword, function(err, valid) {
 				if (err) return next(err);
@@ -256,4 +252,3 @@ module.exports = {
 		});
 	}
 };
-

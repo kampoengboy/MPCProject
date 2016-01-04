@@ -15,8 +15,6 @@ module.exports = {
         nim : 'string',
         email: {
             type: 'string',
-            email: true,
-            unique: true
       },
       admin: {
             type: 'boolean',
@@ -28,4 +26,3 @@ module.exports = {
       username: 'string',
   },
 };
-
