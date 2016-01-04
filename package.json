@@ -34,7 +34,8 @@
     "debug": "node debug app.js"
   },
   "engines": {
-    "node": "4.2.2"
+    "node": "4.2.2",
+    "npm" : "2.14.7",
   },
   "main": "app.js",
   "repository": {
